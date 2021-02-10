@@ -23,9 +23,9 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.debug("Start");
         int size = DEFAULT;
-        try{
+        try {
             size = Integer.parseInt(req.getParameter("size"));
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.debug(e.getMessage());
         }
         Stream<Integer> infiniteStream = Stream.iterate(0, i -> ++i);
@@ -33,7 +33,7 @@ public class ProductServlet extends HttpServlet {
                 .limit(size)
                 .map(x -> new Product(x, Integer.toString(x), x))
                 .collect(Collectors.toList());
-        for(Product product : products) {
+        for (Product product : products) {
             resp.getWriter().println("<p> " + product + "</p>");
         }
         resp.getWriter().close();
