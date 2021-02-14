@@ -41,6 +41,11 @@ public class MainApp {
                         splitCommands[2],
                         Integer.parseInt(splitCommands[3]));
             }
+
+            if (cmd.equals("delete")) {
+                productService.delete(
+                        Integer.parseInt(splitCommands[1]));
+            }
             if (cmd.equals("averagePrice")) {
                 System.out.println(productService.averagePrice());
             }

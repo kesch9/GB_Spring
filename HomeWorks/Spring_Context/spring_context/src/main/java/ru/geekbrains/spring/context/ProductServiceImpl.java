@@ -45,18 +45,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void update(int id, String title, int cost) {
-        OptionalInt ind = IntStream.range(0, products.size()-1).filter(n -> products.get(n).getId() == id).findFirst();
+        OptionalInt ind = IntStream.range(0, products.size()).filter(n -> products.get(n).getId() == id).findFirst();
         if (ind.isPresent()){
-            products.remove(ind);
+            products.remove(ind.getAsInt());
             products.add(new Product(id,title,cost));
             return;
         }
+        System.out.println("Product didn't find");
     }
 
     @Override
     public void delete(int id) {
 
-        OptionalInt ind = IntStream.range(0, products.size()-1).filter(n -> products.get(n).getId() == id).findFirst();
+        OptionalInt ind = IntStream.range(0, products.size()).filter(n -> products.get(n).getId() == id).findFirst();
 
         if (ind.isPresent()){
             products.remove(ind.getAsInt());
