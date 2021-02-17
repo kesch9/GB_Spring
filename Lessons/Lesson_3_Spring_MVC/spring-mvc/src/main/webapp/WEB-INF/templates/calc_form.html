@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Calc form</title>
+</head>
+<body>
+    <div class="container">
+        <!-- @ = http://localhost:8189/app -->
+        <!--     baseUrl              /context-path -->
+        <h1>Кальулятор</h1>
+        <form method="GET" th:action="@{'/calc_result'}">
+            <input name="var_a" type="number" th:value="${param.var_a != null ? param.var_a : ''}"/>
+            <input name="var_b" type="number" th:value="${param.var_b != null ? param.var_b : ''}"/>
+            <button class="btn btn-primary" type="submit">Подтвердить</button>
+        </form>
+
+        <h1 th:text="${'Результат = ' + param.var_a != null ? param.var_a : ''}"/>
+
+
+    </div>
+</body>
+</html>
