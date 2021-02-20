@@ -1,14 +1,10 @@
 package com.geekbrains.spring.mvc.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @ToString
 public class Product {
     private Long id;
