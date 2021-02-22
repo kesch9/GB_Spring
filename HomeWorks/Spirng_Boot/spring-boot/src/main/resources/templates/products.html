@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Фильтр</h1>
+    <form method="get" th:action="@{'/products'}">
+        <input class="form-control" th:value="${param.minCost != null ? param.minCost : ''}" type="number" placeholder="Минимальная цена" name="minCost"/>
+        <input class="form-control" th:value="${param.maxCost != null ? param.maxCost : ''}" type="number" placeholder="Максимальная цена" name="maxCost"/>
+        <button class="btn btn-primary" type="submit">Найти</button>
+    </form>
+    <h1>Список продуктов</h1>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${products}">
+            <td th:text="${p.id}"/>
+            <td th:text="${p.title}"/>
+            <td th:text="${p.cost}"/>
+            <td>
+                <a class="btn btn-danger" th:href="@{'/products/delete/' + ${p.id}}">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form method="get" th:action="@{/products/select}">
+        <input type="number" placeholder="Найти по ID" name="id"/>
+        <button class="btn btn-primary" type="submit">Найти</button>
+    </form>
+</div>
+
+</body>
+</html>
