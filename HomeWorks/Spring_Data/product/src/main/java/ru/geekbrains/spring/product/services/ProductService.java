@@ -1,6 +1,9 @@
 package ru.geekbrains.spring.product.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.spring.product.model.Product;
 import ru.geekbrains.spring.product.repository.ProductRepository;
@@ -20,17 +23,16 @@ public class ProductService {
         return productRepository.findProductsByCostBetween(min, max);
     }
 
-//    public List<Student> getAllByScore(Integer first, Integer second) {
-//
-//        return studentRepository.findStudentsByScoreBetween(first, second);
-//    }
+    public Page<Product> getAllPage(int page, int size, Sort.Direction direction, String... param) {
+        return productRepository.findAll(PageRequest.of(page, size, direction, param));
+    }
 
     public Product getById(Long id) {
         return productRepository.findById(id).get();
     }
 
-    public Product getByName(String name) {
-        return productRepository.findProductByName(name);
+    public List<Product> getByName(String name) {
+        return productRepository.findProductsByNameContainingIgnoreCase(name);
     }
 
     public Product add(Product product) {
