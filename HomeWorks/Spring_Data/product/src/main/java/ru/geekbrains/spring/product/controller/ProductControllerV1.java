@@ -7,36 +7,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.geekbrains.spring.product.model.Product;
+import ru.geekbrains.spring.product.model.dtos.ProductDto;
+import ru.geekbrains.spring.product.model.entities.Product;
 import ru.geekbrains.spring.product.services.ProductService;
 import ru.geekbrains.spring.product.utils.ValuesAllowed;
 
-import javax.validation.ConstraintViolationException;
+import org.hibernate.exception.ConstraintViolationException;
 import java.util.List;
+
 @Validated
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/api/v1/products")
+public class ProductControllerV1 {
 
     @Autowired
     private ProductService productService;
-
-
-    //    получение всех товаров [ GET .../geek/products ] c доп. параметрами
-//    @GetMapping
-//    public List<Product> getAll(@RequestParam Optional<String> min,
-//                                @RequestParam Optional<String> max) {
-//
-//        int minValue = 0;
-//        if (min.isPresent()) {
-//            minValue = Integer.parseInt(min.get());
-//        }
-//        if (max.isPresent()) {
-//            return productService.getAll(minValue, Integer.parseInt(max.get()));
-//        }
-//
-//        return productService.getAll(minValue);
-//    }
 
 
     //1. Добавить пагинацию (с обработкой неправильных значений т.е. возвращать не пустой массив).
@@ -66,22 +51,22 @@ public class ProductController {
     public List<Product>getByName(@RequestParam String name){
         return productService.getByName(name);
     }
-    //    получение товара по id [ GET .../geek/products/{id} ]
+    //    получение товара по id [ GET .../geek/api/v1/{id} ]
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id) {
         return productService.getById(id);
     }
 
-    //    создание нового товара [ POST .../geek/products ]
+    //    создание нового товара [ POST .../geek/pi/v1/products ]
     @PostMapping
-    public Product add(@RequestBody Product product) {
-        return productService.add(product);
+    public Product add(@RequestBody ProductDto product) {
+        return productService.save(product);
     }
 
-    //    удаление товара по id.[ GET .../geek/products/delete/{id} ]
-    @GetMapping("/delete/{id}")
+    //    удаление товара по id.[ GET .../geek/pi/v1/products/{id} ]
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        productService.delete(id);
+        productService.deleteById(id);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

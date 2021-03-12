@@ -1,25 +1,30 @@
-create table products (id bigserial primary key, name varchar(255), cost int);
-insert into products (name, cost) values
-('Product1', 1),
-('Product2', 2),
-('Product3', 3),
-('Product4', 4),
-('Product5', 5),
-('Product6', 6),
-('Product7', 7),
-('Product8', 8),
-('Product9', 9),
-('Product10', 10),
-('ProductA11', 11),
-('Producta12', 12),
-('ProductB13', 13),
-('Product14', 14),
-('Product15', 1),
-('Product16', 16),
-('Product17', 17),
-('Product18', 18),
-('Product19', 19),
-('Product20', 20);
+create table products (
+                          id                      bigserial primary key,
+                          title                   varchar(255),
+                          price                   int,
+                          created_at              timestamp default current_timestamp,
+                          updated_at              timestamp default current_timestamp
+);
+
+insert into products (title, price)
+values
+('Bread', 24),
+('Milk', 65),
+('Cheese', 320),
+('Cheese2', 322),
+('Cheese3', 323),
+('Cheese4', 324),
+('Cheese5', 325),
+('Cheese6', 326),
+('Cheese7', 327),
+('Cheese8', 328),
+('Cheese9', 328),
+('Cheese10', 328),
+('Cheese11', 328),
+('Cheese12', 328),
+('Cheese13', 328),
+('Cheese14', 328),
+('Cheese15', 328);
 
 
 
