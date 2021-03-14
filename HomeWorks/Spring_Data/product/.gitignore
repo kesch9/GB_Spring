@@ -31,9 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-### Custom ###
-*MavenWrapperDownloader.java
-!.mvn/*
-!.mvnw/*
-mvnw.cmd
